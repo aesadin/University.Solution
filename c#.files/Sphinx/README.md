@@ -17,8 +17,8 @@ This application will provide the user with a riddle, if the user gets the anser
 
 | Behavior | Input | Output|
 |----------|-------|-------|
-| Takes User input | Towel | Answer = Towel |
-| Evaluate user input| Towel | "You are very clever, here is another riddle" |
+| Takes User input | Towel | answer = towel |
+| Evaluate user input| _riddle="I am wet when drying. What am I?"_ answer = "Towel" | "You are very clever, here is another riddle" |
 
 
 ## Known Bugs

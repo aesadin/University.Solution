@@ -4,56 +4,42 @@ using System.Linq;
 
 class Program
 {
-  public static Dictionary<string, string> riddles = new Dictionary<string, string>();
-  public static void FilledRiddles(Dictionary<string, string> dictionaryOfRiddles)
+  public static void FilledRiddles(Dictionary<string, string> riddles)
   {
-    dictionaryOfRiddles.Add("I am wet when drying. What am I?", "towel");
-    dictionaryOfRiddles.Add("I shave every day, but my beard stays the same. What am I?", "barber");
-    dictionaryOfRiddles.Add("David’s parents have three sons: Snap, Crackle, and what’s the name of the third son?", "david");
-    dictionaryOfRiddles.Add("What invention lets you look right through a wall?", "window");
-    dictionaryOfRiddles.Add("What has words, but never speaks?", "book");
+    riddles.Add("I am wet when drying. What am I?", "towel");
+    riddles.Add("I shave every day, but my beard stays the same. What am I?", "barber");
+    riddles.Add("David’s parents have three sons: Snap, Crackle, and what’s the name of the third son?", "david");
+    riddles.Add("What invention lets you look right through a wall?", "window");
+    riddles.Add("What has words, but never speaks?", "book");
   }
 
-  public static void Main()
+  public static int RandomIndexInDictionary(int numberOfElementsInTheDictionary) 
   {
-    FilledRiddles(riddles);
     Random random = new Random();
-    int randomIndexInDictionary = random.Next(riddles.Count);
+    return random.Next(numberOfElementsInTheDictionary);
+  }
+
+  public static void NextRiddle(Dictionary<string, string> riddles)
+  {
+    int randomIndex = RandomIndexInDictionary(riddles.Count);
     Console.WriteLine("Answer this riddle");
-    Console.WriteLine(riddles.ElementAt(randomIndexInDictionary).Key);
-    string answer = Console.ReadLine();
-    if (answer == riddles.ElementAt(randomIndexInDictionary).Value) 
+    Console.WriteLine(riddles.ElementAt(randomIndex).Key);
+    string answer = Console.ReadLine().ToLower();
+    if (answer == riddles.ElementAt(randomIndex).Value) 
     {
       Console.WriteLine("You are very clever, here is another riddle");
-      //NextRiddle();
+      NextRiddle(riddles);      
     }
     else
     {
       Console.WriteLine("You have answered incorrectly");      
     }
+  }  
+  
+  public static void Main()
+  {
+    Dictionary<string, string> myRiddles = new Dictionary<string, string>();
+    FilledRiddles(myRiddles);
+    NextRiddle(myRiddles);
   }
 }
-
-// I am wet when drying. What am I?
-// A towel.
-
-/*13. Riddle: I shave every day, but my beard stays the same. What am I?
-Answer: A barber
-
-20. Riddle: David’s parents have three sons: Snap, Crackle, and what’s the name of the third son?
-Answer: David
-
-29. Riddle: What invention lets you look right through a wall?
-Answer: A window
-
-30. Riddle: If you’ve got me, you want to share me; if you share me, you haven’t kept me. What am I?
-Answer: A secret
-
-32. Riddle: What goes up and down but doesn’t move?
-Answer: A staircase
-
-45. Riddle: What has words, but never speaks?
-Answer: A book
-
-47. Riddle: What can travel all around the world without leaving its corner?
-Answer: A stamp*/
