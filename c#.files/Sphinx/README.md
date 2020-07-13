@@ -6,7 +6,7 @@
 
 ## Description
 
-This application will provide the user with a riddle, if the user gets the anser to the riddle correct, then the user wins. If the user answers incorrectly, then the Sphinx eats the user. 
+This application will provide the user with a riddle, if the user gets the answer to the riddle correct, then the user wins. If the user answers incorrectly, then the Sphinx eats the user. 
 
 ## Setup/Installation Requirements
 
@@ -18,7 +18,9 @@ This application will provide the user with a riddle, if the user gets the anser
 | Behavior | Input | Output|
 |----------|-------|-------|
 | Takes User input | Towel | answer = towel |
-| Evaluate user input| _riddle="I am wet when drying. What am I?"_ answer = "Towel" | "You are very clever, here is another riddle" |
+| Evaluate user input | _riddle="I am wet when drying. What am I?"_ answer = "Towel" | "You are very clever, here is another riddle" |
+| Generate a random riddle | randomNumber=3 | dictionaryOfRiddles[3].Key = "What invention lets you look right through a wall?" |
+| Create a function that switches to the next riddle | answer = "towel" | "You are very clever, here is another riddle", _another riddle will prompt_ |
 
 
 ## Known Bugs
