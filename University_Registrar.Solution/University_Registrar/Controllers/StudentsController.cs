@@ -20,10 +20,12 @@ namespace UniversityRegistrar.Controllers
     {
       if (searchQuery == null)
       {
+        ViewBag.SearchFlag = 0;
         return View(_db.Students.ToList());
       }
       else
       {
+        ViewBag.SearchFlag = 1;
         List<Student> searchList = _db.Students.Where(student => student.StudentName.ToLower().Contains(searchQuery.ToLower())).ToList();
         return View(searchList);
       }

@@ -6,11 +6,14 @@
 
 <h1>Students</h1>
 
-@if (@Model.Count == 0)
+@if (@ViewBag.SearchFlag == 1 && Model.Count == 0) 
 {
-  <h3>No Students Have Been Added Yet</h3>
+  <h3>No search results found.</h3>
 }
-
+else if (@ViewBag.SearchFlag == 0 && Model.Count == 0)
+{
+  <h3>No students have been added yet!</h3>
+}
 <ul>
   @foreach (Student student in Model)
   {
