@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+@using UniversityRegistrar.Models;
+@model List<UniversityRegistrar.Models.Student>;
+
+<h1>Students</h1>
+
+@if (@Model.Count == 0)
+{
+  <h3>No Students Have Been Added Yet</h3>
+}
+
+<ul>
+  @foreach (Student student in Model)
+  {
+    <li>@Html.ActionLink($"{student.StudentName}", "Details", new { id = student.StudentId })</li>
+  }
+</ul>
+<p>@Html.ActionLink("Add new student", "Create")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
