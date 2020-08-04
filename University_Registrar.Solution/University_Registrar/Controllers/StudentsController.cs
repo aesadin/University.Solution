@@ -16,9 +16,17 @@ namespace UniversityRegistrar.Controllers
       _db = db;
     }
 
-    public ActionResult Index()
+    public ActionResult Index(string searchQuery = null)
     {
-      return View(_db.Students.ToList());
+      if (searchQuery == null)
+      {
+        return View(_db.Students.ToList());
+      }
+      else
+      {
+        List<Student> searchList = _db.Students.Where(student => student.StudentName.ToLower().Contains(searchQuery.ToLower())).ToList();
+        return View(searchList);
+      }
     }
     
     public ActionResult Edit(int id)

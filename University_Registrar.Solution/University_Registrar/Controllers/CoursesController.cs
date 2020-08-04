@@ -15,10 +15,20 @@ namespace UniversityRegistrar.Controllers
       _db = db;
     }
 
-    public ActionResult Index()
+    public ActionResult Index(string searchQuery = null)
     {
-      List<Course> model = _db.Courses.ToList();
-      return View(model);
+      if (searchQuery == null)
+      {
+        ViewBag.SearchFlag = 0;
+        return View(_db.Courses.ToList());
+      }
+      else
+      {
+        ViewBag.SearchFlag = 1;
+        List<Course> model = _db.Courses.Where(course => course.Name.ToLower().Contains(searchQuery.ToLower())).ToList();
+        return View(model);
+      }
+      
     }
 
     public ActionResult Create()
