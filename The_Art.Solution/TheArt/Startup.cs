@@ -1,10 +1,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 using TheArt.Models;
 
 namespace TheArt
@@ -13,9 +12,9 @@ namespace TheArt
   {
     public Startup(IHostingEnvironment env)
     {
-      var builder = new Confirguration()
-        .SetBasePath(env.ContentRootPath)
-        .AddJsonFile("appsettings.json");
+      var builder = new ConfigurationBuilder()
+          .SetBasePath(env.ContentRootPath)
+          .AddJsonFile("appsettings.json");
       Configuration = builder.Build();
     }
 
@@ -24,33 +23,14 @@ namespace TheArt
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddMvc();
-
       services.AddEntityFrameworkMySql()
-        .AddDbContext<ToDoListContext>(options => options
+        .AddDbContext<TheArtContext>(options => options
         .UseMySql(Configuration["ConnectionStrings:DefaultConnection"]));
-
-      services.AddIdentity<ApplicationUser, IdentityRole>()
-        .AddEntityFrameworkStores<ToDoListContext>()
-        .AddDefaultTokenProviders();
-
-      services.Configure<IdentityOptions>(options =>
-      {
-        options.Password.RequireDigit = false;
-        options.Password.RequiredLength = 0;
-        options.Password.RequireLowercase = false;
-        options.Password.RequireNonAlphanumeric = false;
-        options.Password.RequireUppercase = false;
-        options.Password.RequiredUniqueChars = 0;
-      });
     }
 
     public void Configure(IApplicationBuilder app)
     {
-      app.UseStaticFiles();
-
       app.UseDeveloperExceptionPage();
-
-      app.UseAuthentication();
 
       app.UseMvc(routes =>
       {
@@ -59,10 +39,11 @@ namespace TheArt
           template: "{controller=Home}/{action=Index}/{id?}");
       });
 
-      app.Run(async (context) =>
-      {
-        await context.Response.WriteAsync("Something went wrong!");
-      });
+        app.Run(async (context) =>
+        {
+          await context.Response.WriteAsync("Uh oh! The monkeys are loose again and they seem to have gone after the computers!");
+        });
+
     }
   }
 }

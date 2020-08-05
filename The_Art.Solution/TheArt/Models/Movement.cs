@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 
 namespace TheArt.Models
 {
@@ -15,6 +15,6 @@ namespace TheArt.Models
       public string MovementDescription { get; set; }
       public DateTime MovementStart { get; set; }
       public DateTime MovementEnd { get; set; }
-      public virtual ICollection<ArtistMovement> Artists { get; set; }
+      public ICollection<ArtistMovement> Artists { get; set; }
     }
 }
