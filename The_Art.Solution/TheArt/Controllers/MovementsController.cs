@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using UniversityRegistrar.Models;
+using TheArt.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
@@ -8,9 +8,9 @@ namespace TheArt.Controllers
 {
   public class MovementsController : Controller
   {
-    private readonly UniversityRegistrarContext _db;
+    private readonly TheArtContext _db;
 
-    public MovementsController(UniversityRegistrarContext db)
+    public MovementsController(TheArtContext db)
     {
       _db = db;
     }
@@ -25,7 +25,7 @@ namespace TheArt.Controllers
       else
       {
         ViewBag.SearchFlag = 1;
-        List<Movement> model = _db.Movements.Where(Movement => Movement.Name.ToLower().Contains(searchQuery.ToLower())).ToList();
+        List<Movement> model = _db.Movements.Where(movement => movement.Name.ToLower().Contains(searchQuery.ToLower())).ToList();
         return View(model);
       }
     }
@@ -36,9 +36,9 @@ namespace TheArt.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Movement Movement)
+    public ActionResult Create(Movement movement)
     {
-      _db.Movements.Add(Movement);
+      _db.Movements.Add(movement);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
@@ -46,36 +46,36 @@ namespace TheArt.Controllers
     public ActionResult Details(int id)
     {
       var thisMovement = _db.Movements
-          .Include(Movement => Movement.Students)
-          .ThenInclude(join => join.Student)
-          .FirstOrDefault(Movement => Movement.MovementId == id);
+          .Include(movement => movement.Artists)
+          .ThenInclude(join => join.Artist)
+          .FirstOrDefault(movement => movement.MovementId == id);
       return View(thisMovement);
     }
 
     public ActionResult Edit(int id)
     {
-      var thisMovement = _db.Movements.FirstOrDefault(Movement => Movement.MovementId == id);
+      var thisMovement = _db.Movements.FirstOrDefault(movement => movement.MovementId == id);
       return View(thisMovement);
     }
 
     [HttpPost]
-    public ActionResult Edit(Movement Movement)
+    public ActionResult Edit(Movement movement)
     {
-      _db.Entry(Movement).State = EntityState.Modified;
+      _db.Entry(movement).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
     public ActionResult Delete(int id)
     {
-      var thisMovement = _db.Movements.FirstOrDefault(Movement => Movement.MovementId == id);
+      var thisMovement = _db.Movements.FirstOrDefault(movement => Movement.MovementId == id);
       return View(thisMovement);
     }
 
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
-      var thisMovement = _db.Movements.FirstOrDefault(Movement => Movement.MovementId == id);
+      var thisMovement = _db.Movements.FirstOrDefault(movement => movement.MovementId == id);
       _db.Movements.Remove(thisMovement);
       _db.SaveChanges();
       return RedirectToAction("Index");

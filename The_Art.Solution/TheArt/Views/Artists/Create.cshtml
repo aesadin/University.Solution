@@ -6,4 +6,12 @@
 
 <h1>New Artist</h1>
 
-@us
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBo""xFor(model => model.Name)
+  <input type="submit" value="add" />
+}
+
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
+<p>@Html.ActionLink("All artists", "Index")</p>
